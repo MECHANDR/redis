@@ -2968,6 +2968,7 @@ void authCommand(client *c) {
     if (ACLAuthenticateUser(c,username,password) == C_OK) {
         addReply(c,shared.ok);
     } else {
+        c->authenticated = 0;
         addReplyError(c,"-WRONGPASS invalid username-password pair or user is disabled.");
     }
 }
