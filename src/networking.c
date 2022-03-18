@@ -3381,6 +3381,7 @@ void helloCommand(client *c) {
             redactClientCommandArgument(c, j+1);
             redactClientCommandArgument(c, j+2);
             if (ACLAuthenticateUser(c, c->argv[j+1], c->argv[j+2]) == C_ERR) {
+                c->authenticated = 0;
                 addReplyError(c,"-WRONGPASS invalid username-password pair or user is disabled.");
                 return;
             }
